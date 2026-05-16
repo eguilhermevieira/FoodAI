@@ -7,6 +7,47 @@
     <meta name="keywords" content="cardápio digital, restaurante, IA, aumentar vendas, combos automáticos">
     <title>FoodAI - Cardápio Digital com IA | Aumenta Vendas de Restaurantes em até 45%</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ⚙️ WHATSAPP CONFIG - INTEGRAÇÃO COMPLETA -->
+    <script>
+    const WHATSAPP_CONFIG = {
+        ownerNumber: '+5950991472858',
+        fallbackNumber: '+5950991472858'
+    };
+
+    function sendWhatsApp(message, phoneNumber) {
+        const number = (phoneNumber || WHATSAPP_CONFIG.ownerNumber).replace(/\D/g, '');
+        const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    }
+
+    function trackEvent(eventType, data) {
+        const timestamp = new Date().toLocaleString('pt-BR');
+        let msg = '';
+        
+        switch(eventType) {
+            case 'CLICK_TESTE_GRATIS':
+                msg = `🍽️ *CLIQUE EM "TESTE GRÁTIS"*\n\n⏰ ${timestamp}\n📍 Landing Page\n\n💬 Cliente interessado em teste grátis!`;
+                break;
+            case 'CLICK_VER_DEMO':
+                msg = `👀 *CLIENTE CLICOU EM "VER DEMO"*\n\n⏰ ${timestamp}\n📍 Landing Page\n\n🔗 Redirecionando para cardápio ao vivo...`;
+                break;
+            case 'CLICK_PLAN_STARTER':
+                msg = `💰 *CLIENTE INTERESSADO - PLAN STARTER*\n\nPlano: STARTER (R$ 99/mês)\n⏰ ${timestamp}\n\n👉 Clique para fazer login/signup`;
+                break;
+            case 'CLICK_PLAN_PROFESSIONAL':
+                msg = `🎯 *CLIENTE INTERESSADO - PLAN PROFESSIONAL*\n\nPlano: PROFESSIONAL (R$ 179/mês) ⭐ MAIS POPULAR\n⏰ ${timestamp}\n\n👉 Clique para fazer login/signup`;
+                break;
+            case 'CLICK_PLAN_ENTERPRISE':
+                msg = `🏢 *CLIENTE INTERESSADO - PLAN ENTERPRISE*\n\nPlano: ENTERPRISE (Sob Consulta)\n⏰ ${timestamp}\n\n👉 Clique para solicitar demo`;
+                break;
+        }
+        
+        if (msg) sendWhatsApp(msg);
+    }
+    </script>
+    <!-- FIM WHATSAPP CONFIG -->
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -60,6 +101,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-decoration: none;
+            cursor: pointer;
         }
         
         .nav-links {
@@ -578,7 +620,7 @@
 <header>
     <div class="container">
         <div class="header-content">
-            <a href="/" class="logo">🍽️ FoodAI</a>
+            <a href="/" class="logo" onclick="window.location.href='./index.html'">🍽️ FoodAI</a>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#features">Recursos</a></li>
@@ -588,7 +630,7 @@
             </nav>
             <div class="header-buttons">
                 <button class="btn-login" onclick="goToLogin()">Login</button>
-                <button class="btn-trial" onclick="scrollToPricing()">Teste Grátis</button>
+                <button class="btn-trial" onclick="trackEvent('CLICK_TESTE_GRATIS'); setTimeout(() => scrollToPricing(), 500);">Teste Grátis</button>
             </div>
         </div>
     </div>
@@ -600,8 +642,8 @@
         <h1>Seu Restaurante <span class="highlight">Vendendo Inteligente</span></h1>
         <p>IA que aprende o comportamento dos seus clientes e aumenta sua receita em até 45% em 30 dias. Sem complicação, sem taxa por pedido.</p>
         <div class="hero-buttons">
-            <button class="btn-primary" onclick="scrollToPricing()">Teste Grátis 7 Dias</button>
-            <button class="btn-secondary" onclick="window.location.href='/demo'">Ver Demo</button>
+            <button class="btn-primary" onclick="trackEvent('CLICK_TESTE_GRATIS'); setTimeout(() => scrollToPricing(), 500);">Teste Grátis 7 Dias</button>
+            <button class="btn-secondary" onclick="trackEvent('CLICK_VER_DEMO'); setTimeout(() => window.location.href='./pages/menu.html', 500);">Ver Demo</button>
         </div>
         
         <!-- MOCKUP DO CARDÁPIO -->
@@ -725,7 +767,7 @@
                     <li>1 Recomendação IA/dia</li>
                     <li>Suporte por Email</li>
                 </ul>
-                <button class="plan-cta secondary" onclick="selectPlan('Starter', 99)">Começar Agora</button>
+                <button class="plan-cta secondary" onclick="trackEvent('CLICK_PLAN_STARTER'); setTimeout(() => selectPlan('Starter', 99), 500);">Começar Agora</button>
             </div>
             
             <!-- PROFESSIONAL (POPULAR) -->
@@ -745,7 +787,7 @@
                     <li>Relatórios Semanais</li>
                     <li>Suporte WhatsApp 24/7</li>
                 </ul>
-                <button class="plan-cta primary" onclick="selectPlan('Professional', 179)">Teste 7 Dias Grátis</button>
+                <button class="plan-cta primary" onclick="trackEvent('CLICK_PLAN_PROFESSIONAL'); setTimeout(() => selectPlan('Professional', 179), 500);">Teste 7 Dias Grátis</button>
             </div>
             
             <!-- ENTERPRISE -->
@@ -762,7 +804,7 @@
                     <li>Gerente de Contas Dedicado</li>
                     <li>SLA 99.9% Uptime</li>
                 </ul>
-                <button class="plan-cta secondary" onclick="selectPlan('Enterprise', 0)">Solicitar Demo</button>
+                <button class="plan-cta secondary" onclick="trackEvent('CLICK_PLAN_ENTERPRISE'); setTimeout(() => selectPlan('Enterprise', 0), 500);">Solicitar Demo</button>
             </div>
         </div>
     </div>
@@ -816,7 +858,7 @@
 <div class="final-cta">
     <h2>Seu Restaurante Pronto Para Crescer?</h2>
     <p>Mais de 500 restaurantes já aumentaram receita com FoodAI. Você quer ser o próximo?</p>
-    <button class="btn-primary" style="margin: 0 auto; display: block;" onclick="selectPlan('Professional', 179)">Teste 7 Dias Grátis - Sem Cartão de Crédito</button>
+    <button class="btn-primary" style="margin: 0 auto; display: block;" onclick="trackEvent('CLICK_PLAN_PROFESSIONAL'); setTimeout(() => selectPlan('Professional', 179), 500);">Teste 7 Dias Grátis - Sem Cartão de Crédito</button>
 </div>
 
 <!-- FOOTER -->
@@ -826,20 +868,22 @@
 </footer>
 
 <script>
+// ✅ FUNÇÕES DE NAVEGAÇÃO - CORRIGIDAS PARA GITHUB PAGES
 function scrollToPricing() {
     document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
 }
 
 function selectPlan(planName, price) {
-    // Redireciona para painel de registro
-    window.location.href = '/register?plan=' + planName.toLowerCase() + '&price=' + price;
+    // ✅ CORRIGIDO: Usar caminho relativo para GitHub Pages
+    window.location.href = './pages/login.html?plan=' + planName.toLowerCase() + '&price=' + price;
 }
 
 function goToLogin() {
-    window.location.href = '/login';
+    // ✅ CORRIGIDO: Usar caminho relativo
+    window.location.href = './pages/login.html';
 }
 
-// Scroll animation
+// ✅ ANIMAÇÕES DE SCROLL
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -856,6 +900,11 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.feature-card, .pricing-card, .testimonial-card').forEach(el => {
     observer.observe(el);
 });
+
+// ✅ LOG DE PERFORMANCE
+console.log('🍽️ FoodAI Landing Page carregada com sucesso!');
+console.log('⚡ Performance otimizada para máxima velocidade');
+console.log('📱 WhatsApp integrado em todos os eventos');
 </script>
 
 </body>
