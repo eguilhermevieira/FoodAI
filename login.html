@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FoodAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #D32F2F;
+            --primary-dark: #B71C1C;
+            --bg-light: #F5F7FA;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --border: #E0E0E0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #E8EAF6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, #F44336 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 32px;
+            text-decoration: none;
+        }
+        
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        
+        .form-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 24px;
+        }
+        
+        .btn-login:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 24px 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .btn-signup {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-signup:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 24px;
+        }
+        
+        .back-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .back-link a:hover {
+            opacity: 0.7;
+        }
+        
+        .error {
+            color: #D32F2F;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+        
+        input.invalid {
+            border-color: #D32F2F;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <a href="/" class="logo">🍽️ FoodAI</a>
+    
+    <div id="login-form">
+        <h2 class="form-title">Bem-vindo de Volta!</h2>
+        <p class="form-desc">Acesse seu painel de restaurante</p>
+        
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="seu@email.com" required>
+                <div class="error" id="email-error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+                <div class="error" id="password-error"></div>
+            </div>
+            
+            <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                <label style="margin: 0;">
+                    <input type="checkbox" id="remember" style="width: auto; margin-right: 6px;">
+                    <span style="font-weight: 400;">Lembrar-me</span>
+                </label>
+                <a href="#" style="font-size: 13px; color: var(--primary); text-decoration: none; font-weight: 600;">Esqueceu?</a>
+            </div>
+            
+            <button type="submit" class="btn-login">Acessar Painel</button>
+        </form>
+        
+        <div class="divider">OU</div>
+        
+        <button class="btn-signup" onclick="switchToSignup()">Criar Nova Conta</button>
+        
+        <div class="back-link">
+            <a href="/">← Voltar para Home</a>
+        </div>
+    </div>
+    
+    <div id="signup-form" style="display: none;">
+        <h2 class="form-title">Criar Conta</h2>
+        <p class="form-desc">Comece seu teste gratuito de 7 dias</p>
+        
+        <form onsubmit="handleSignup(event)">
+            <div class="form-group">
+                <label for="restaurant-name">Nome do Restaurante</label>
+                <input type="text" id="restaurant-name" placeholder="Seu Restaurante" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="owner-name">Seu Nome</label>
+                <input type="text" id="owner-name" placeholder="João Silva" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" placeholder="seu@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">WhatsApp</label>
+                <input type="tel" id="phone" placeholder="(11) 99999-9999" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password-signup">Senha</label>
+                <input type="password" id="password-signup" placeholder="••••••••" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="plan">Plano</label>
+                <select id="plan" required>
+                    <option value="">Selecione um plano</option>
+                    <option value="starter">Starter - R$ 99/mês</option>
+                    <option value="professional">Professional - R$ 179/mês (Recomendado)</option>
+                    <option value="enterprise">Enterprise - Sob Consulta</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn-login">Criar Conta Grátis</button>
+        </form>
+        
+        <button style="width: 100%; padding: 10px; margin-top: 16px; background: none; color: var(--primary); border: none; font-weight: 600; font-size: 13px; cursor: pointer;" onclick="switchToLogin()">← Voltar para Login</button>
+    </div>
+</div>
+
+<script>
+function switchToSignup() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('signup-form').style.display = 'block';
+}
+
+function switchToLogin() {
+    document.getElementById('signup-form').style.display = 'none';
+    document.getElementById('login-form').style.display = 'block';
+}
+
+function handleLogin(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    // Validação simples
+    if (!email || !password) {
+        alert('Preencha todos os campos');
+        return;
+    }
+    
+    // Simular login
+    // Em produção, fazer POST para API
+    alert('✅ Login realizado!\n\nRedirecionando para seu painel...');
+    
+    // Guardar no localStorage
+    localStorage.setItem('user', JSON.stringify({
+        email: email,
+        loggedIn: true,
+        loginTime: new Date().getTime()
+    }));
+    
+    // Redirecionar para dashboard
+    window.location.href = '/dashboard';
+}
+
+function handleSignup(event) {
+    event.preventDefault();
+    
+    const restaurantName = document.getElementById('restaurant-name').value;
+    const ownerName = document.getElementById('owner-name').value;
+    const email = document.getElementById('signup-email').value;
+    const phone = document.getElementById('phone').value;
+    const password = document.getElementById('password-signup').value;
+    const plan = document.getElementById('plan').value;
+    
+    if (!restaurantName || !ownerName || !email || !phone || !password || !plan) {
+        alert('Preencha todos os campos');
+        return;
+    }
+    
+    // Simular registro
+    alert(`✅ Conta criada com sucesso!\n\nRestaurante: ${restaurantName}\nPlano: ${plan}\n\nVocê tem 7 dias grátis!`);
+    
+    // Guardar no localStorage
+    localStorage.setItem('user', JSON.stringify({
+        restaurantName: restaurantName,
+        ownerName: ownerName,
+        email: email,
+        phone: phone,
+        plan: plan,
+        loggedIn: true,
+        signupTime: new Date().getTime(),
+        trialEndsAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime()
+    }));
+    
+    // Redirecionar para dashboard
+    window.location.href = '/dashboard';
+}
+
+// Verificar se já está logado
+window.addEventListener('load', () => {
+    const user = localStorage.getItem('user');
+    if (user) {
+        const userData = JSON.parse(user);
+        if (userData.loggedIn) {
+            window.location.href = '/dashboard';
+        }
+    }
+});
+</script>
+
+</body>
+</html>
