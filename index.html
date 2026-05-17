@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FoodAI - Cardápio Digital Inteligente com IA que aumenta suas vendas em até 45% em 30 dias">
+    <meta name="keywords" content="cardápio digital, restaurante, IA, aumentar vendas, combos automáticos">
+    <title>FoodAI - Cardápio Digital com IA | Aumenta Vendas de Restaurantes em até 45%</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ⚙️ WHATSAPP CONFIG -->
+    <script>
+    const WHATSAPP_CONFIG = {
+        ownerNumber: '+5950991472858'
+    };
+
+    function sendWhatsApp(message) {
+        const number = WHATSAPP_CONFIG.ownerNumber.replace(/\D/g, '');
+        const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    }
+
+    function trackEvent(eventType) {
+        const timestamp = new Date().toLocaleString('pt-BR');
+        let msg = '';
+        
+        switch(eventType) {
+            case 'CLICK_TESTE_GRATIS':
+                msg = `🍽️ *CLIQUE "TESTE GRÁTIS"*\n⏰ ${timestamp}`;
+                break;
+            case 'CLICK_VER_DEMO':
+                msg = `👀 *CLIQUE "VER DEMO"*\n⏰ ${timestamp}`;
+                break;
+            case 'CLICK_PLAN_STARTER':
+                msg = `💰 *PLAN STARTER R$ 99/mês*\n⏰ ${timestamp}`;
+                break;
+            case 'CLICK_PLAN_PROFESSIONAL':
+                msg = `🎯 *PLAN PROFESSIONAL R$ 179/mês*\n⏰ ${timestamp}`;
+                break;
+            case 'CLICK_PLAN_ENTERPRISE':
+                msg = `🏢 *PLAN ENTERPRISE*\n⏰ ${timestamp}`;
+                break;
+        }
+        if (msg) sendWhatsApp(msg);
+    }
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #D32F2F;
+            --primary-dark: #B71C1C;
+            --primary-light: #F44336;
+            --accent: #FFC107;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --bg-light: #FAFAFA;
+            --bg-white: #FFFFFF;
+            --border: #E0E0E0;
+            --green: #4CAF50;
+        }
+        
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background: var(--bg-white);
+            overflow-x: hidden;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 16px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--primary); }
+        
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn-login {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+        
+        .btn-login:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-trial {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 13px;
+        }
+        
+        .btn-trial:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(211, 47, 47, 0.3);
+        }
+        
+        .hero {
+            margin-top: 80px;
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(211,47,47,0.05) 0%, rgba(255,193,7,0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(211,47,47,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+        
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 16px 48px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(211, 47, 47, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            padding: 16px 48px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .hero-image {
+            max-width: 1000px;
+            margin: 0 auto;
+            animation: fadeInDown 1s ease-out 0.3s both;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .social-proof {
+            background: var(--bg-light);
+            padding: 48px 20px;
+            text-align: center;
+        }
+        
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .proof-card {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .proof-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .proof-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .features {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 48px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        
+        .feature-card {
+            padding: 32px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        .pricing {
+            background: var(--bg-light);
+            padding: 80px 20px;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 48px;
+        }
+        
+        .pricing-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card.popular {
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 16px 40px rgba(211, 47, 47, 0.15);
+        }
+        
+        .badge {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .plan-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        
+        .plan-price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+        
+        .plan-price span {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        .plan-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        
+        .plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .plan-features li::before {
+            content: '✓ ';
+            color: var(--green);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+        
+        .plan-cta {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .plan-cta.primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .plan-cta.primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .plan-cta.secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .plan-cta.secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .testimonials {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .stars {
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+        
+        .testimonial-text {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .author-info h4 {
+            font-size: 15px;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+        
+        .author-info p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            margin: 60px 20px;
+            border-radius: 8px;
+        }
+        
+        .final-cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 24px;
+        }
+        
+        .final-cta p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 48px 20px;
+            text-align: center;
+        }
+        
+        footer p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 16px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+        
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 40px; }
+            .hero p { font-size: 16px; }
+            .hero-buttons { flex-direction: column; }
+            .pricing-card.popular { transform: scale(1); }
+            .section-title { font-size: 36px; }
+            .final-cta h2 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="container">
+        <div class="header-content">
+            <a href="#top" class="logo">🍽️ FoodAI</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#features">Recursos</a></li>
+                    <li><a href="#pricing">Preços</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                </ul>
+            </nav>
+            <div class="header-buttons">
+                <button class="btn-login" onclick="abrirLogin()">Login</button>
+                <button class="btn-trial" onclick="trackEvent('CLICK_TESTE_GRATIS'); setTimeout(() => scrollToPricing(), 500);">Teste Grátis</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+    <div class="hero-content">
+        <h1>Seu Restaurante <span class="highlight">Vendendo Inteligente</span></h1>
+        <p>IA que aprende o comportamento dos seus clientes e aumenta sua receita em até 45% em 30 dias. Sem complicação, sem taxa por pedido.</p>
+        <div class="hero-buttons">
+            <button class="btn-primary" onclick="trackEvent('CLICK_TESTE_GRATIS'); setTimeout(() => abrirLogin(), 500);">Teste Grátis 7 Dias</button>
+            <button class="btn-secondary" onclick="trackEvent('CLICK_VER_DEMO'); setTimeout(() => window.location.href='./pages/menu.html', 500);">Ver Demo</button>
+        </div>
+        
+        <div class="hero-image">
+            <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" style="background: linear-gradient(135deg, #F5F5F5 0%, #FAFAFA 100%);">
+                <rect x="20" y="20" width="360" height="460" rx="16" fill="white" stroke="#E0E0E0" stroke-width="2"/>
+                <rect x="20" y="20" width="360" height="70" rx="16" fill="#D32F2F"/>
+                <text x="200" y="65" text-anchor="middle" font-size="20" font-weight="bold" fill="white">Seu Restaurante</text>
+                <rect x="40" y="110" width="320" height="100" rx="8" fill="#F5F5F5" stroke="#E0E0E0"/>
+                <circle cx="60" cy="140" r="25" fill="#667eea"/>
+                <text x="95" y="145" font-size="14" font-weight="bold" fill="#1A1A1A">Burger Gourmet</text>
+                <text x="95" y="165" font-size="11" fill="#666666">Carne Angus 180g</text>
+                <text x="320" y="200" text-anchor="end" font-size="16" font-weight="bold" fill="#D32F2F">R$ 35</text>
+                <rect x="40" y="225" width="320" height="100" rx="8" fill="#F5F5F5" stroke="#E0E0E0"/>
+                <circle cx="60" cy="255" r="25" fill="#764ba2"/>
+                <text x="95" y="260" font-size="14" font-weight="bold" fill="#1A1A1A">Pizza Margherita</text>
+                <text x="95" y="280" font-size="11" fill="#666666">Massa caseira, mozzarela</text>
+                <text x="320" y="315" text-anchor="end" font-size="16" font-weight="bold" fill="#D32F2F">R$ 38</text>
+                <rect x="40" y="340" width="320" height="50" rx="8" fill="#D32F2F"/>
+                <text x="200" y="370" text-anchor="middle" font-size="16" font-weight="bold" fill="white">🛒 2 itens | R$ 73</text>
+                <rect x="420" y="40" width="340" height="280" rx="12" fill="white" stroke="#D32F2F" stroke-width="2"/>
+                <text x="590" y="70" text-anchor="middle" font-size="18" font-weight="bold" fill="#D32F2F">🤖 IA Ativa</text>
+                <text x="440" y="120" font-size="12" font-weight="bold" fill="#1A1A1A">Análise Real-time:</text>
+                <text x="440" y="145" font-size="11" fill="#666666">✓ 24 pedidos hoje</text>
+                <text x="440" y="165" font-size="11" fill="#666666">✓ Ticket: R$ 87,50</text>
+                <text x="440" y="185" font-size="11" fill="#666666">✓ Conversão: 34%</text>
+                <text x="440" y="205" font-size="11" fill="#666666">✓ Pico: 11h-13h</text>
+                <text x="440" y="245" font-size="12" font-weight="bold" fill="#4CAF50">💡 Dica IA:</text>
+                <text x="440" y="270" font-size="11" fill="#333333">"Combo Burger+Batata"</text>
+                <text x="440" y="290" font-size="11" fill="#333333">"+45% de vendas"</text>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="social-proof">
+    <div class="container">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; margin-bottom: 48px;">Confiado por Restaurantes que Crescem</h2>
+        <div class="proof-grid">
+            <div class="proof-card">
+                <div class="proof-number">+500</div>
+                <div class="proof-label">Restaurantes Usando FoodAI</div>
+            </div>
+            <div class="proof-card">
+                <div class="proof-number">R$ 2.5M</div>
+                <div class="proof-label">Em Receita Gerada</div>
+            </div>
+            <div class="proof-card">
+                <div class="proof-number">+35%</div>
+                <div class="proof-label">Aumento Médio em Vendas</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+    <h2 class="section-title">O Que Torna FoodAI Diferente</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>IA que Recomenda Combos</h3>
+            <p>Aprende automaticamente quais pratos vendem juntos. +15% no ticket médio.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Dashboard de Dados Reais</h3>
+            <p>Veja em tempo real: clientes, picos, conversão, itens que vendem pouco.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Dinâmica Inteligente de Preço</h3>
+            <p>IA sugere ajustes nos picos sem perder clientes. +5-8% de receita.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Cardápio 3 em 1</h3>
+            <p>QR Code, WhatsApp, Web e App. Seus clientes escolhem como pedir.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3>Atendimento 24/7</h3>
+            <p>Robô responde sobre cardápio, alergênicos, prazos via WhatsApp.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <h3>Integração iFood/Rappi</h3>
+            <p>Centralize pedidos. Tudo sincronizado num único painel.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <h2 class="section-title">Planos que Fazem Sentido</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="plan-name">Starter</div>
+                <div class="plan-price">R$ <span>99</span><span>/mês</span></div>
+                <p class="plan-desc">Para pequenos restaurantes começando</p>
+                <ul class="plan-features">
+                    <li>Cardápio Ilimitado</li>
+                    <li>QR Code + Web + App</li>
+                    <li>Até 30 pedidos/dia</li>
+                    <li>Dashboard Básico</li>
+                    <li>1 Recomendação IA/dia</li>
+                    <li>Suporte Email</li>
+                </ul>
+                <button class="plan-cta secondary" onclick="trackEvent('CLICK_PLAN_STARTER'); setTimeout(() => abrirLogin(), 500);">Começar Agora</button>
+            </div>
+            
+            <div class="pricing-card popular">
+                <div class="badge">MAIS POPULAR</div>
+                <div class="plan-name">Professional</div>
+                <div class="plan-price">R$ <span>179</span><span>/mês</span></div>
+                <p class="plan-desc">Para restaurantes em crescimento</p>
+                <ul class="plan-features">
+                    <li>Tudo do Starter +</li>
+                    <li>Até 150 pedidos/dia</li>
+                    <li>Dashboard Completo</li>
+                    <li>IA 24/7</li>
+                    <li>Dinâmica de Preço</li>
+                    <li>iFood/Rappi</li>
+                    <li>Relatórios Semanais</li>
+                    <li>WhatsApp 24/7</li>
+                </ul>
+                <button class="plan-cta primary" onclick="trackEvent('CLICK_PLAN_PROFESSIONAL'); setTimeout(() => abrirLogin(), 500);">Teste 7 Dias Grátis</button>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="plan-name">Enterprise</div>
+                <div class="plan-price">Sob <span>Consulta</span></div>
+                <p class="plan-desc">Para redes e franquias</p>
+                <ul class="plan-features">
+                    <li>Tudo do Professional +</li>
+                    <li>Múltiplas Filiais</li>
+                    <li>IA Customizada</li>
+                    <li>API Privada</li>
+                    <li>Relatórios Custom</li>
+                    <li>Gerente Dedicado</li>
+                    <li>SLA 99.9%</li>
+                </ul>
+                <button class="plan-cta secondary" onclick="trackEvent('CLICK_PLAN_ENTERPRISE'); setTimeout(() => abrirLogin(), 500);">Solicitar Demo</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <h2 class="section-title">Restauranteiros Crescendo</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"3 meses depois: ticket de R$ 62 → R$ 87. +R$ 3.500/mês. A IA sugeriu um combo que virou meu prato mais vendido!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MR</div>
+                    <div class="author-info">
+                        <h4>Marina Rodriguez</h4>
+                        <p>Hamburgueria em São Paulo</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Recuperei o investimento em 3 meses. Clientes pedem por QR Code, WhatsApp, App. Menos carga, mais vendas certas."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JC</div>
+                    <div class="author-info">
+                        <h4>João Costa</h4>
+                        <p>Pizzaria em Curitiba</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Dashboard mostra exatamente o que vende. Tirei 2 pratos fracos, criei novos com dados. +18% conversão!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">FG</div>
+                    <div class="author-info">
+                        <h4>Fernanda Gomes</h4>
+                        <p>Restaurante em BH</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+    <h2>Seu Restaurante Pronto Para Crescer?</h2>
+    <p>+500 restaurantes já aumentaram receita. Você quer ser o próximo?</p>
+    <button class="btn-primary" style="margin: 0 auto; display: block;" onclick="trackEvent('CLICK_PLAN_PROFESSIONAL'); setTimeout(() => abrirLogin(), 500);">Teste 7 Dias Grátis</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2026 FoodAI. Desenvolvido com ❤️ para restauranteiros que querem crescer.</p>
+    <p>Políticas de Privacidade | Termos de Uso | Suporte: contato@foodai.com.br</p>
+</footer>
+
+<!-- MODAL LOGIN -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="fecharLogin()">×</button>
+        
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; margin-bottom: 12px;">Bem-vindo</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 32px; font-size: 14px;">Escolha sua forma de acesso</p>
+        
+        <button onclick="handleSocialLogin('google')" style="width: 100%; padding: 12px; border: 2px solid var(--border); background: white; border-radius: 8px; font-weight: 500; cursor: pointer; margin-bottom: 12px;">
+            <span>🔵</span> Continue com Google
+        </button>
+        <button onclick="handleSocialLogin('apple')" style="width: 100%; padding: 12px; border: 2px solid var(--border); background: white; border-radius: 8px; font-weight: 500; cursor: pointer; margin-bottom: 24px;">
+            <span>📘</span> Continue com Apple
+        </button>
+        
+        <div style="display: flex; align-items: center; gap: 12px; margin: 24px 0; font-size: 13px; color: var(--text-secondary);">
+            <div style="flex: 1; height: 1px; background: var(--border);"></div>
+            Ou entre com email
+            <div style="flex: 1; height: 1px; background: var(--border);"></div>
+        </div>
+        
+        <form onsubmit="handleEmailLogin(event)" style="margin-bottom: 24px;">
+            <input type="email" id="modalEmail" placeholder="seu@restaurante.com" class="form-input" required>
+            <button type="submit" style="width: 100%; padding: 14px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px;">
+                <span>✉️</span> Enviar Código de Acesso
+            </button>
+        </form>
+        
+        <div style="text-align: center; font-size: 14px; color: var(--text-secondary);">
+            <span>Precisa criar uma conta? </span>
+            <a href="#" onclick="abrirSignup(); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">Registre-se aqui</a>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL SIGNUP -->
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="fecharSignup()">×</button>
+        
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; margin-bottom: 12px;">Criar Conta</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 32px; font-size: 14px;">7 dias grátis, sem cartão</p>
+        
+        <form onsubmit="handleSignup(event)">
+            <input type="text" placeholder="Nome do Restaurante" id="signupRestaurant" class="form-input" required>
+            <input type="text" placeholder="Seu Nome" id="signupOwner" class="form-input" required>
+            <input type="email" placeholder="seu@email.com" id="signupEmailField" class="form-input" required>
+            <input type="tel" placeholder="(11) 99999-9999" id="signupPhone" class="form-input" required>
+            <select id="signupPlan" class="form-select" required>
+                <option value="">Selecione um plano</option>
+                <option value="starter">Starter - R$ 99/mês</option>
+                <option value="professional">Professional - R$ 179/mês (Recomendado)</option>
+                <option value="enterprise">Enterprise - Sob Consulta</option>
+            </select>
+            <button type="submit" style="width: 100%; padding: 14px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px;">
+                <span>✨</span> Criar Conta (7 dias grátis)
+            </button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 20px; font-size: 14px;">
+            <a href="#" onclick="fecharSignup(); abrirLogin(); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">← Voltar para login</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function abrirLogin() {
+    document.getElementById('loginModal').style.display = 'flex';
+}
+
+function fecharLogin() {
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+function abrirSignup() {
+    fecharLogin();
+    document.getElementById('signupModal').style.display = 'flex';
+}
+
+function fecharSignup() {
+    document.getElementById('signupModal').style.display = 'none';
+}
+
+function handleSocialLogin(provider) {
+    const msg = `🍽️ SOCIAL LOGIN: ${provider}\n⏰ ${new Date().toLocaleString('pt-BR')}`;
+    sendWhatsApp(msg);
+    setTimeout(() => {
+        localStorage.setItem('user', JSON.stringify({restaurant: provider, loggedIn: true}));
+        window.location.href = './pages/dashboard.html';
+    }, 1000);
+}
+
+function handleEmailLogin(event) {
+    event.preventDefault();
+    const email = document.getElementById('modalEmail').value;
+    const msg = `🍽️ EMAIL LOGIN: ${email}\n⏰ ${new Date().toLocaleString('pt-BR')}`;
+    sendWhatsApp(msg);
+    fecharLogin();
+    alert('✅ Código enviado para ' + email);
+    setTimeout(() => window.location.href = './pages/login.html', 500);
+}
+
+function handleSignup(event) {
+    event.preventDefault();
+    const restaurant = document.getElementById('signupRestaurant').value;
+    const owner = document.getElementById('signupOwner').value;
+    const email = document.getElementById('signupEmailField').value;
+    const phone = document.getElementById('signupPhone').value;
+    const plan = document.getElementById('signupPlan').value;
+    
+    const msg = `🍽️ NOVO RESTAURANTE\nRestaurante: ${restaurant}\nProprietário: ${owner}\nEmail: ${email}\nWhatsApp: ${phone}\nPlano: ${plan}\n⏰ ${new Date().toLocaleString('pt-BR')}`;
+    sendWhatsApp(msg);
+    
+    localStorage.setItem('user', JSON.stringify({
+        restaurant: restaurant,
+        owner: owner,
+        email: email,
+        phone: phone,
+        plan: plan,
+        loggedIn: true
+    }));
+    
+    fecharSignup();
+    alert('✅ Conta criada! Redirecionando...');
+    setTimeout(() => window.location.href = './pages/dashboard.html', 500);
+}
+
+function scrollToPricing() {
+    document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+}
+
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.feature-card, .pricing-card, .testimonial-card').forEach(el => {
+    observer.observe(el);
+});
+
+console.log('✅ FoodAI Landing + Login integrados!');
+</script>
+
+</body>
+</html>
